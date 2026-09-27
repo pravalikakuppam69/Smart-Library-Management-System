@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Smart Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-brand">
+            <div class="login-logo">📚</div>
+            <h1>Smart Library</h1>
+            <p>Library Management System</p>
+        </div>
+
+        <div class="login-card">
+
+            <div class="login-heading">
+                <span class="section-label">ADMIN PORTAL</span>
+                <h2>Welcome Back</h2>
+                <p>Login to access your library dashboard.</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="login-input">
+                        <span>👤</span>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Enter username"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="login-input">
+                        <span>🔒</span>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div id="loginError" class="login-error">
+                    Invalid username or password.
+                </div>
+
+                <button type="submit" class="primary-btn full-btn">
+                    Login to Dashboard
+                </button>
+
+            </form>
+
+            <div class="login-info">
+                <span>🔐</span>
+                <p>Admin access is required to manage the library.</p>
+            </div>
+
+        </div>
+
+        <p class="login-footer">
+            © 2026 Smart Library Management System
+        </p>
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const loginError = document.getElementById("loginError");
+
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "admin123";
+
+        if (localStorage.getItem("libraryLoggedIn") === "true") {
+            window.location.href = "index.html";
+        }
+
+        loginForm.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (
+                username === ADMIN_USERNAME &&
+                password === ADMIN_PASSWORD
+            ) {
+                localStorage.setItem("libraryLoggedIn", "true");
+                localStorage.setItem("libraryAdmin", username);
+
+                window.location.href = "index.html";
+            } else {
+                loginError.classList.add("show");
+            }
+        });
+    </script>
+
+</body>
+</html>
